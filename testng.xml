@@ -9,7 +9,7 @@
        </classes>
     </test>
     <test verbose="2" preserve-order="true" name="Test2-firefox">
-        <parameter name="Browser" value="edge"/>
+        <parameter name="Browser" value="firefox"/>
         <classes>
             <class name="LoginPage"/>
             <class name="Recherche_produits"/>
