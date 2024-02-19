@@ -1,0 +1,65 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+
+# They are provided by a third-party and are governed by
+
+# separate terms of service, privacy policy, and support
+
+# documentation.
+
+name: Java CI with Maven
+
+on: # events que vous allez déclencher
+
+push: # a chaque fois que tu vas faire un push
+
+branches: [ "main" ]
+
+permissions:
+
+contents: read # permet de lire le dépot
+
+checks: write # permet d'écrire
+
+jobs:
+
+build:
+
+runs-on: ubuntu-latest
+
+steps:
+
+- uses: actions/checkout@v3 # utilise l'action checkout pour récupérer le code source de GitHub (prépare le terrain)
+
+- name: Set up JDK 19 #juste un nom de l'étape
+
+uses: actions/setup-java@v3 #installer le JDK
+
+with:
+
+java-version: '19' #ici la version
+
+distribution: 'temurin'
+
+cache: maven
+
+- name: Build with Maven
+
+run: mvn -B package --file pom.xml #pour exécuter le maven
+
+- name: Upload target folder report
+
+uses : actions/upload-artifact@v2
+
+with:
+
+name: rapport de tests
+
+path : |
+
+${{ github.workspace }}/target
+
+${{ github.workspace }}/reports
